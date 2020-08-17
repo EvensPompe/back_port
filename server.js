@@ -1,11 +1,12 @@
 const express = require('express');
+const dotenv = require('dotenv');
 const app = express();
-let port = 4567
 
-const router = require('./router/router.js');
+dotenv.config();
 
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const router = require('./router/router');
 
 //Convertion Application/json
 app.use(bodyParser.json());
@@ -15,9 +16,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cors());
 
-app.use(router)
+app.use("/",router)
 
 
-app.listen(port,()=>{
-  console.log('Serveur sur le port '+port);
+app.listen(process.env.PORTSERVER,()=>{
+  console.log('Serveur sur le port '+process.env.PORTSERVER);
 });
